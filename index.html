@@ -32,7 +32,7 @@
   </section>
 
   <!-- Menu Section -->
-<section id="menu" class="py-20 px-6 md:px-20 bg-gray-50">
+  <section id="menu" class="py-20 px-6 md:px-20 bg-gray-50">
   <h2 class="text-4xl font-extrabold text-center text-amber-700 mb-14">Our Menu</h2>
   <div class="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 text-center flex flex-col justify-between h-full">
@@ -72,8 +72,6 @@
     </div>
   </div>
 </section>
-
-
 <!-- About Section -->
 <section id="about" class="py-20 px-6 md:px-20 bg-amber-50">
   <div class="max-w-3xl mx-auto text-center">
@@ -87,14 +85,36 @@
 <!-- Contact Section -->
 <section id="contact" class="py-20 px-6 md:px-20 bg-white">
   <h2 class="text-4xl font-extrabold text-center text-amber-700 mb-10">Get in Touch</h2>
-  <form action="https://formspree.io/f/mblknoyg" method="POST" class="max-w-xl mx-auto space-y-6">
-    <input type="text" name="name" placeholder="Your Name" required  class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" />
-    <input type="email" name="email" placeholder="Your Email" required  class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" />
-    <textarea name="message" placeholder="Your Message" rows="4" required  class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
-    <button type="submit" class="w-full px-6 py-4 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800 transition duration-300">
-        Send Message
-    </button>  
-  </form>
+  <form id="contact-form" action="https://formspree.io/f/mblknoyg" method="POST" class="max-w-xl mx-auto space-y-6">
+  <input type="text" name="name" placeholder="Your Name" required class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" />
+  <input type="email" name="email" placeholder="Your Email" required class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" />
+  <textarea name="message" placeholder="Your Message" rows="4" required class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+
+  <button type="submit" class="w-full px-6 py-4 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800 transition duration-300">
+    Send Message
+  </button>
+</form>
+
+<script>
+  document.getElementById("contact-form").addEventListener("submit", async function(e) {
+  e.preventDefault(); // stop default redirect to Formspree JSON page
+  const form = e.target;
+  const data = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  if (response.ok) {
+    window.location.href = "thankyou.html"; // redirect manually
+  } else {
+    alert("There was a problem submitting the form.");
+  }
+  });
+</script>
+
 </section>
 
 <!-- Footer -->
